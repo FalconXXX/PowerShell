@@ -1,0 +1,20 @@
+#===========================================================#
+Change UPN Suffix One User \ *<*/
+24.07.2021 					                            
+by FalcoonXXX 	(Manuel Riedeer)                  
+Build & Tested on:       Windows 10   	          
+https://github.com/FalconXXX                     
+add -> #####                                     
+#===========================================================#
+
+$accName = Read-Host -Prompt "Bitte geben Accountnamen ein der geändert werden soll:"
+
+$tmp = get-aduser $accName -properties * | Select-Object mail, EmailAddress,proxyAddresses
+$oldupn = $tmp.mail
+$new_suffix = "####.at"
+$userName = $tmp.mail.Split('@')[0]
+$NEWUPN = $userName +"@" + $new_suffix
+set-aduser $accName -UserPrincipalName $NEWUPN
+set-aduser $accName -replace  @{proxyAddresses="SMTP:$NEWUPN","smtp:$oldupn"} 
+set-aduser $accName -replace  @{targetAddress=$NEWUPN} 
+set-aduser $accName -replace  @{mail=$NEWUPN}
