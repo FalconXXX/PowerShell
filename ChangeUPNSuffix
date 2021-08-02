@@ -17,8 +17,8 @@ $oldupn = $users.userprincipalname
 $new_suffix = "#####.com"
 $userName = $users.userprincipalname.Split('@')[0]  
 $NEWUPN = $userName +"@" + $new_suffix
-Set-ADUser $users.samaccountname -UserPrincipalName $NEWUPN
-set-aduser $users.samaccountname -replace @{ProxyAddresses="SMTP:$NEWUPN","smtp:$oldupn"} 
+Set-aduser $users.samaccountname -UserPrincipalName $NEWUPN
+set-aduser $users.samaccountname -replace  @{proxyAddresses="SMTP:$NEWUPN","smtp:$oldupn"} 
 set-aduser $users.samaccountname -replace  @{targetAddress=$NEWUPN} 
 set-aduser $users.samaccountname -replace  @{mail=$NEWUPN}
 write-host "$oldupn auf $new_suffix geändert -> $NEWUPN" -background green -foreground red
