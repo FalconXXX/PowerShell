@@ -1,26 +1,28 @@
-#===========================================================#
+#===========================================================#https://github.com/FalconXXX/PowerShell/blob/main/ChangeUPNSuffix
 Change UPN Suffix \ *<*/
-26.07.2021 					                            
+05.08.2021 					                            
 by FalcoonXXX 	(Manuel Riedeer)                  
 Build & Tested on:       Windows 10   	          
 https://github.com/FalconXXX                     
 add -> #####                                     
 #===========================================================#
 
-$user = get-aduser -Filter * -Properties * | where {$_.distinguishedName -like "*#####"} | select-Object samaccountname, name, mail, userprincipalname,proxyaddresses
-
+$ou = Read-Host -Prompt "OU:"
+$user = get-aduser  -Filter * -Properties * | where {$_.distinguishedName -like "*OU=$ou,DC=#####,DC=local"} | select-Object samaccountname, name, mail, userprincipalname
 
 foreach ($users in $user) {
- 
- 
-$oldupn = $users.userprincipalname
-$new_suffix = "#####.com"
+ $oldupn = $users.userprincipalname
+write-host "Aktuell -> $oldupn" -background black -foreground white
+
+$new_suffix = "#####.at"
 $userName = $users.userprincipalname.Split('@')[0]  
 $NEWUPN = $userName +"@" + $new_suffix
-Set-aduser $users.samaccountname -UserPrincipalName $NEWUPN
-set-aduser $users.samaccountname -replace  @{proxyAddresses="SMTP:$NEWUPN","smtp:$oldupn"} 
+Set-ADUser $users.samaccountname -UserPrincipalName $NEWUPN
+set-aduser $users.samaccountname -add @{ProxyAddresses="SMTP:$NEWUPN"}
+set-aduser $users.samaccountname -remove @{ProxyAddresses="smtp:$oldUPN"}
+set-aduser $users.samaccountname -add @{ProxyAddresses="smtp:$oldUPN"}
 set-aduser $users.samaccountname -replace  @{targetAddress=$NEWUPN} 
 set-aduser $users.samaccountname -replace  @{mail=$NEWUPN}
-write-host "$oldupn auf $new_suffix geändert -> $NEWUPN" -background green -foreground red
+write-host "Geändert -> $NEWUPN" -background green -foreground red
 
 }
