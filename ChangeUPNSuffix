@@ -1,10 +1,10 @@
 #===========================================================#
-Change UPN Suffix \ *<*/
-05.08.2021 					                            
-by FalcoonXXX 	(Manuel Riedeer)                  
-Build & Tested on:       Windows 10   	          
-https://github.com/FalconXXX/PowerShell                 
-add -> #####                                     
+#Change UPN Suffix SMTP  all users in the selected OU \ *<*/
+#05.08.2021 					                            
+#by FalcoonXXX 	(Manuel Riedeer)                  
+#Build & Tested on:       Windows 10   	          
+#https://github.com/FalconXXX/PowerShell                 
+#add -> #####                                     
 #===========================================================#
 
 $ou = Read-Host -Prompt "OU:"
@@ -12,17 +12,16 @@ $user = get-aduser  -Filter * -Properties * | where {$_.distinguishedName -like 
 
 foreach ($users in $user) {
  $oldupn = $users.userprincipalname
-write-host "Aktuell -> $oldupn" -background black -foreground white
-
-$new_suffix = "#####.at"
-$userName = $users.userprincipalname.Split('@')[0]  
-$NEWUPN = $userName +"@" + $new_suffix
-Set-ADUser $users.samaccountname -UserPrincipalName $NEWUPN
-set-aduser $users.samaccountname -add @{ProxyAddresses="SMTP:$NEWUPN"}
-set-aduser $users.samaccountname -remove @{ProxyAddresses="smtp:$oldUPN"}
-set-aduser $users.samaccountname -add @{ProxyAddresses="smtp:$oldUPN"}
-set-aduser $users.samaccountname -replace  @{targetAddress=$NEWUPN} 
-set-aduser $users.samaccountname -replace  @{mail=$NEWUPN}
-write-host "Geändert -> $NEWUPN" -background green -foreground red
+ write-host "Aktuell -> $oldupn" -background black -foreground white
+ $new_suffix = "#####.at"
+ $userName = $users.userprincipalname.Split('@')[0]  
+ $NEWUPN = $userName +"@" + $new_suffix
+ set-aduser $users.samaccountname -UserPrincipalName $NEWUPN
+ set-aduser $users.samaccountname -add @{ProxyAddresses="SMTP:$NEWUPN"}
+ set-aduser $users.samaccountname -remove @{ProxyAddresses="smtp:$oldUPN"}
+ set-aduser $users.samaccountname -add @{ProxyAddresses="smtp:$oldUPN"}
+ set-aduser $users.samaccountname -replace  @{targetAddress=$NEWUPN} 
+ set-aduser $users.samaccountname -replace  @{mail=$NEWUPN}
+ write-host "Geändert -> $NEWUPN" -background green -foreground red
 
 }
