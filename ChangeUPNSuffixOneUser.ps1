@@ -1,10 +1,10 @@
 #===========================================================#
-Change UPN Suffix  SMTP (one Account\User) \ *<*/
-24.07.2021 					                            
-by FalcoonXXX 	(Manuel Rieder)                  
-Build & Tested on:       Windows 10   	          
-https://github.com/FalconXXX                     
-add -> #####                                     
+#Change UPN Suffix  SMTP (one Account\User) \ *<*/
+#24.07.2021 					                            
+#by FalcoonXXX 	(Manuel Rieder)                  
+#Build & Tested on:       Windows 10   	          
+#https://github.com/FalconXXX                     
+#add -> #####                                     
 #===========================================================#
 
 $account = Read-Host -Prompt "Account\User:"
