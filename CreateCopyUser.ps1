@@ -1,9 +1,9 @@
 #===========================================================#
 #Create\Copy new User *<*/
 #12.10.2021 					                            
-#by Gh0str4ider	(Manuel Rieder)                  
+#by FalconXXX	(Manuel Rieder)                  
 #Build & Tested on:       Windows 11   	          
-#https://github.com/Gh0str4ider/PowerShell                                                     
+#https://github.com/FalconXXX/PowerShell                                                     
 #===========================================================#
 
 
