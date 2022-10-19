@@ -1,9 +1,9 @@
 #===========================================================#
 #Change UPN Suffix  SMTP (one Account\User) \ *<*/
 #24.07.2021 					                            
-#by Gh0str4ider  Manuel Rieder)                  
+#by FalconXXX  Manuel Rieder)                  
 #Build & Tested on:       Windows 10   	          
-#https://github.com/Gh0str4ider                     
+#https://github.com/FalconXXX                     
 #add -> #####                                     
 #===========================================================#
 
