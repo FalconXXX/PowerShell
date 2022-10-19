@@ -1,9 +1,9 @@
 #===========================================================#
 #Change General Account  FirstName\LastName\UPN\CN  \ </
 #09.10.2021 					                            
-#by Gh0str4ider 	(Manuel Rieder)                  
+#by FalconXXX 	(Manuel Rieder)                  
 #Build & Tested on:       Windows 10   	          
-#https://github.com/Gh0str4ider/PowerShell                                                     
+#https://github.com/FalconXXX/PowerShell                                                     
 #===========================================================#
 
 
