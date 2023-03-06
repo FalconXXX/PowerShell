@@ -10,8 +10,7 @@ Write-Host "Perform update? Y or N:"
 $inputSW = Read-Host
 if($inputSW -eq "Y")
 {
-    Start-Process powershell -Verb runAs
-    winget upgrade -h --all 
+    winget upgrade -h --all    
     Write-Host "SW update performed"
 }
 else{
